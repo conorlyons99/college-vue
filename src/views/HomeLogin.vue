@@ -1,17 +1,15 @@
 <template>
-  <div class="home">
-    Welcome to the College-Vue App
-
-    <br>
-
-    
+  <div>
+    Email:<input type="email" v-model="form.email" />
+    Password:<input type="password" v-model="form.password" />
+    <b-button class="float-right" variant="outline-primary" @click="login()">Submit</b-button>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 export default {
-  name: 'Home',
+  name: 'HomeLogin',
   components: {
   },
   data(){
@@ -43,7 +41,4 @@ export default {
 </script>
 
 <style>
-.home{
-  text-align: center;
-}
 </style>

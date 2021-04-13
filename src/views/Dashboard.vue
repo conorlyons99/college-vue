@@ -1,33 +1,24 @@
 <template>
-  <div class="home">
-    Welcome to the College-Vue App
+  <div class="dashboard">
+    Welcome to your dashboard
 
     <br>
+    <a href='courses_index'>Show Courses </a>
 
-    
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 export default {
-  name: 'Home',
+  name: 'Dashboard',
   components: {
   },
   data(){
-    return{
-      form: {
-        email: "",
-        password: ""
-      }
-    }
   },
   methods: {
-    login() {
-      axios.post('http://college.api:8000/api/login', {
-        email: this.form.email,
-        password: this.form.password
-      })
+    showCourses() {
+      axios.post('http://college.api:8000/api/courses')
       .then(response => {
         console.log(response.data);
         localStorage.setItem('token', response.data.token);
@@ -43,7 +34,7 @@ export default {
 </script>
 
 <style>
-.home{
-  text-align: center;
-}
+ .dashboard{
+   text-align: center;
+ }
 </style>
