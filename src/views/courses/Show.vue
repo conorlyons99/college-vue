@@ -1,12 +1,26 @@
 <template>
-  <div>
+  <div class="container-fluid">
 
 
-  <h4>Title: </h4> {{ course.title }} <br>
-  <h4>Code: </h4> {{ course.code }}<br>
-  <h4>Description: </h4> {{ course.description }}<br>
-  <h4>Points: </h4> {{ course.points }}<br>
-  <h4>Level: </h4> {{ course.level }}<br>
+        <b-card style="max-width: 80rem;" class="mb-2 home">
+          <b-card-text>
+          <h5>Title:</h5> {{ course.title }}  <br>
+            <h5>Code:</h5> {{ course.code }} <br>
+            <h5>Points:</h5> {{ course.points }} <br>
+          <h5>Level:</h5> {{ course.level }} <br>
+          </b-card-text>
+        </b-card>
+
+        <b-card style="max-width: 80rem;" class="mb-2 home">
+          <b-card-text>
+            <h5>Description:</h5> {{ course.description }} <br>
+          </b-card-text>
+
+        </b-card>
+        <div class="text-center margin">
+          <b-button variant="danger" class="float" @click="deleteCourse()">Delete Course</b-button>
+        </div>
+
 
   <b-table striped hover :items="course.enrolments">
     <!-- <template #cell(title)="data">
@@ -30,6 +44,7 @@ export default {
     }
   },
   mounted(){
+
     let token = localStorage.getItem('token');
 
     axios.get(`http://college.api:8000/api/courses/${this.$route.params.id}`, {
@@ -46,11 +61,43 @@ export default {
     })
   },
   methods: {
+    deleteCourse(){
+      let token = localStorage.getItem("token");
+      let id = this.$route.params.id;
+
+      this.course.enrolments.forEach((enrolment) => {
+        console.log(enrolment.id);
+        axios
+        .delete("http://college.api:8000/api/enrolments/" + enrolment.id, {
+            headers: { Authorization: "Bearer " + token },
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+
+      axios
+      .delete(`http://college.api:8000/api/courses/${id}`, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then(() => {
+          this.$router.replace({ name: "courses_index" });
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log(error.response.data);
+        });
+
+    }
   },
 }
 </script>
 <style>
 .home {
   text-align: center;
+}
+.margin{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>

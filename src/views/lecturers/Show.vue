@@ -1,11 +1,15 @@
 <template>
   <div>
 
-
-  <h4>Name: </h4> {{ lecturer.name }} <br>
-  <h4>Address: </h4> {{ lecturer.address }}<br>
-  <h4>Email: </h4> {{ lecturer.email }}<br>
-  <h4>Phone: </h4> {{ lecturer.phone }}<br>
+    <b-card style="max-width: 80rem;" class="mb-2 home">
+      <b-card-text>
+      <h5>Title:</h5> {{ lecturer.name }}  <br>
+        <h5>Code:</h5> {{ lecturer.address }} <br>
+        <h5>Description:</h5> {{ lecturer.email }} <br>
+        <h5>Points:</h5> {{ lecturer.phone }} <br>
+      </b-card-text>
+      <b-button variant="danger" class="float-right" @click="deleteLecturer()">Delete</b-button>
+    </b-card>
 
 
   </div>
@@ -31,7 +35,7 @@ export default {
     })
     .then(response => {
       console.log(response.data);
-      this.course = response.data.data;
+      this.lecturer = response.data.data;
 
     })
     .catch(error => {
@@ -40,6 +44,34 @@ export default {
     })
   },
   methods: {
+    deleteLecturer(){
+      let token = localStorage.getItem("token");
+      let id = this.$route.params.id;
+
+      this.lecturer.enrolments.forEach((enrolment) => {
+        console.log(enrolment.id);
+        axios
+        .delete("http://college.api:8000/api/enrolments/" + enrolment.id, {
+            headers: { Authorization: "Bearer " + token },
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+
+      axios
+      .delete(`http://college.api:8000/api/lecturers/${id}`, {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then(() => {
+          this.$router.replace({ name: "lecturers_index" });
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log(error.response.data);
+        });
+
+    }
   },
 }
 </script>

@@ -1,17 +1,24 @@
 <template>
   <div>
-    This is the Lecturers Index page
+    <h2>Lecturers Index page</h2>
 
     <br>
-    <router-link :to="{ name: 'lecturers_create'}">Create</router-link>
+    <h6><router-link :to="{ name: 'lecturers_create'}">Create a Lecturer</router-link></h6>
+    <br>
+    <div class="search">
+      <input class="searchTerm" type="text" placeholder="Search.." v-model="term" />
+    </div>
 
     <b-button variant="danger" class="float-right" @click="logout()">Logout</b-button>
 
     <br><br>
 
-    <b-table striped hover :items="lecturers" :fields="fields">
+    <b-table hover :items="filterLecturers" :fields="fields">
       <template #cell(name)="data">
         <router-link :to="{ name: 'lecturers_show', params: { id: data.item.id }}">{{ data.item.name }}</router-link>
+      </template>
+      <template #cell(actions)="data">
+        <router-link :to="{ name: 'lecturers_edit', params: { id: data.item.id }}">Edit</router-link>
       </template>
     </b-table>
 
@@ -35,14 +42,37 @@ export default {
         'address',
         'email',
         'phone',
+        'Actions',
         ],
-      lecturers: []
+      lecturers: [],
+      term: "",
+      filterLecturers: [],
+    }
+  },
+  watch: {
+    term: function(newTerm, oldTerm) {
+      console.log('New: ', newTerm)
+      console.log('Old: ', oldTerm)
+      this.searchLecturer();
     }
   },
   mounted(){
     this.getLecturers();
   },
   methods: {
+
+    searchLecturer() {
+      this.filterLecturers = this.lecturers.filter(lecturer => {
+        if (lecturer.name.toLowerCase().includes(this.term.toLowerCase())) {
+          return true
+        }
+
+        if (lecturer.email.toLowerCase().includes(this.term.toLowerCase())) {
+          return true
+        }
+      });
+    },
+
     getLecturers() {
       let token = localStorage.getItem('token');
 
@@ -52,7 +82,7 @@ export default {
       .then(response => {
         console.log(response.data);
         this.lecturers = response.data.data;
-
+        this.filterLecturers = response.data.data;
       })
       .catch(error => {
         console.log(error)

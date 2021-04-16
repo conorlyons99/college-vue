@@ -1,13 +1,13 @@
 <template>
   <div>
 
-    title: <input type="text" v-model="form.title" /> <br>
-    code: <input type="text" v-model="form.code" /> <span v-if="errors.code"> {{ errors.code }} </span><br>
-    description: <input type="text" v-model="form.description" /> <br>
-    points: <input type="text" v-model="form.points" /> <span v-if="errors.points"> {{ errors.points }} </span><br>
-    level: <input type="text" v-model="form.level" /> <span v-if="errors.level"> {{ errors.level }} </span><br>
+    Title: <input type="text" v-model="form.title" class="form-input" /> <br>
+    Code: <input type="text" v-model="form.code" class="form-input" /> <span v-if="errors.code"> {{ errors.code }} </span><br>
+    Description: <input type="text" v-model="form.description" class="form-input" /> <br>
+    Points: <input type="text" v-model="form.points" class="form-input" /> <span v-if="errors.points"> {{ errors.points }} </span><br>
+    Level: <input type="text" v-model="form.level" class="form-input" /> <span v-if="errors.level"> {{ errors.level }} </span><br>
 
-    <button @click="createCourse()">Submit</button>
+    <b-button variant="primary" class="margin" @click="createCourse()">Submit</b-button>
 
 
   </div>
@@ -69,4 +69,26 @@ export default {
 .home {
   text-align: center;
 }
+.margin{
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+.form-input{
+  color:black;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color: transparent;
+  border:1px solid #CC6666;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+
+.form-input:focus { border:2px solid #CC4945 }
 </style>

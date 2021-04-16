@@ -1,0 +1,113 @@
+<template>
+<div>
+  <b-card>
+  <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form-group id="input-group-1" label="Course title:" label-for="input-1">
+      <b-form-input id="input-1" v-model="course.title" type="text" placeholder="Enter title" required></b-form-input>
+    </b-form-group>
+
+    <b-form-group id="input-group-1" label="Course code:" label-for="input-1">
+      <b-form-input id="input-1" v-model="course.code" type="text" placeholder="Enter code" required></b-form-input>
+    </b-form-group>
+
+    <b-form-group id="input-group-1" label="Course Points:" label-for="input-1">
+      <b-form-input id="input-1" v-model="course.points" type="text" placeholder="Enter Points" required></b-form-input>
+    </b-form-group>
+
+    <b-form-group id="input-group-1" label="Course Level:" label-for="input-1">
+      <b-form-input id="input-1" v-model="course.level" type="text" placeholder="Enter Level" required></b-form-input>
+    </b-form-group>
+
+
+    <b-button type="submit" variant="primary">Update Course</b-button>
+    <b-button variant="warning" class="float-left" @click="cancel()">Cancel</b-button>
+  </b-form>
+</b-card>
+
+</div>
+</template>
+
+<script>
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      course: {
+        title: '',
+
+      },
+
+      show: true
+    }
+  },
+  created() {
+    this.getCourse();
+  },
+  methods: {
+    cancel(){
+      this.$router.replace({ name: 'courses_index' });
+    },
+    getCourse() {
+      let token = localStorage.getItem('token');
+      let id = this.$route.params.id;
+
+      axios.get('http://college.api:8000/api/courses/' + id, {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          this.course = response.data.data;
+
+        })
+        .catch(error => {
+          console.log(error)
+          console.log(error.response.data)
+        })
+    },
+    onSubmit(event) {
+      let id = this.$route.params.id;
+      let token = localStorage.getItem('token');
+      event.preventDefault()
+      axios.put('http://college.api:8000/api/courses/' + id, {
+          title: this.course.title,
+          code: this.course.code,
+          description: this.course.description,
+          points: this.course.points,
+          level: this.course.level,
+        }, {
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          this.$router.push({
+            name: 'courses_index'
+          });
+        })
+        .catch(error => {
+          console.log(error)
+          console.log(error.response.data)
+          if (error.response.data.errors) {
+            this.errors = error.response.data.errors
+          }
+        })
+    },
+    onReset(event) {
+      event.preventDefault()
+      // Reset our form values
+      this.form.email = ''
+      this.form.name = ''
+      this.form.food = null
+      this.form.checked = []
+      // Trick to reset/clear native browser form validation state
+      this.show = false
+      this.$nextTick(() => {
+        this.show = true
+      })
+    }
+  }
+}
+</script>

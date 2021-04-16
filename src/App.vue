@@ -2,7 +2,9 @@
   <div>
     <NavBar />
     <b-container>
-      <router-view />
+      <vue-page-transition name="fade-in-up">
+        <router-view/>
+      </vue-page-transition>
     </b-container>
   </div>
 </template>

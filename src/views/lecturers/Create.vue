@@ -1,12 +1,12 @@
 <template>
   <div>
 
-    Name: <input type="text" v-model="form.name" /> <br>
-    Address: <input type="text" v-model="form.address" /> <span v-if="errors.address"> {{ errors.address }} </span><br>
-    Email: <input type="text" v-model="form.email" /> <br>
-    Phone: <input type="text" v-model="form.phone" /> <span v-if="errors.phone"> {{ errors.phone }} </span><br>
+    Name: <input type="text" v-model="form.name" class="form-input" /> <br>
+    Address: <input type="text" v-model="form.address" class="form-input" /> <span v-if="errors.address"> {{ errors.address }} </span><br>
+    Email: <input type="text" v-model="form.email" class="form-input" /> <br>
+    Phone: <input type="text" v-model="form.phone" class="form-input" /> <span v-if="errors.phone"> {{ errors.phone }} </span><br>
 
-    <button @click="createLecturer()">Submit</button>
+    <b-button variant="primary" class="margin" @click="createLecturer()">Submit</b-button>
 
 
   </div>
@@ -66,4 +66,11 @@ export default {
 .home {
   text-align: center;
 }
+/* input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+} */
 </style>
