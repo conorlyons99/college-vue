@@ -35,7 +35,7 @@ export default {
       .then(response => {
         console.log(response.data);
         localStorage.setItem('token', response.data.token);
-        this.$router.replace({ name: '/' });
+        this.$router.replace({ name: '/courses' });
       })
       .catch(error => {
         console.log(error)

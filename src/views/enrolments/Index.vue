@@ -1,17 +1,20 @@
 <template>
   <div>
-    This is the Enrolments Index page
-
+    <h2>Enrolments Index page</h2>
     <br>
-    <router-link :to="{ name: 'enrolments_create'}">Create</router-link>
+    <h6><router-link :to="{ name: 'enrolments_create'}">Create an Enrolment</router-link></h6>
+    <br>
 
     <b-button variant="danger" class="float-right" @click="logout()">Logout</b-button>
 
     <br><br>
 
-    <b-table striped hover :items="enrolments" :fields="fields">
+    <b-table hover :items="enrolments" :fields="fields">
       <template #cell(date)="data">
         <router-link :to="{ name: 'enrolments_show', params: { id: data.item.id }}">{{ data.item.date }}</router-link>
+      </template>
+      <template #cell(actions)="data">
+        <router-link :to="{ name: 'enrolments_edit', params: { id: data.item.id }}">Edit</router-link>
       </template>
     </b-table>
 
@@ -36,6 +39,7 @@ export default {
         'status',
         'course_id',
         'lecturer_id',
+        'Actions',
         ],
       enrolments: []
     }

@@ -1,12 +1,10 @@
 <template>
   <div>
-
     Title: <input type="text" v-model="form.title" class="form-input" /> <br>
     Code: <input type="text" v-model="form.code" class="form-input" /> <span v-if="errors.code"> {{ errors.code }} </span><br>
     Description: <input type="text" v-model="form.description" class="form-input" /> <br>
     Points: <input type="text" v-model="form.points" class="form-input" /> <span v-if="errors.points"> {{ errors.points }} </span><br>
     Level: <input type="text" v-model="form.level" class="form-input" /> <span v-if="errors.level"> {{ errors.level }} </span><br>
-
     <b-button variant="primary" class="margin" @click="createCourse()">Submit</b-button>
 
 
@@ -29,13 +27,14 @@ export default {
         points: "",
         level: "",
       },
-      errors: {}
+      courses: [],
+      errors: {},
     }
   },
   mounted(){
-
   },
   methods: {
+
     createCourse() {
       let token = localStorage.getItem('token');
 

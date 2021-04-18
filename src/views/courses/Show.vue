@@ -18,7 +18,11 @@
 
         </b-card>
         <div class="text-center margin">
-          <b-button variant="danger" class="float" @click="deleteCourse()">Delete Course</b-button>
+          <b-button v-b-modal.modal-1 variant="danger" class="float">Delete Course</b-button>
+          <b-modal header-bg-variant="danger" id="modal-1" title="Delete Course?" @ok="deleteCourse()" ok-title="Delete" ok-variant="danger" cancel-variant="warning" centered>
+            <p class="my-4">Warning! Deleting this course will also cause any enrolments attached to be deleted, continue?</p>
+            <b class="my-4">Note: Action may be required twice for course to be deleted</b>
+          </b-modal>
         </div>
 
 

@@ -8,9 +8,14 @@
         <h5>Description:</h5> {{ lecturer.email }} <br>
         <h5>Points:</h5> {{ lecturer.phone }} <br>
       </b-card-text>
-      <b-button variant="danger" class="float-right" @click="deleteLecturer()">Delete</b-button>
     </b-card>
 
+    <div class="text-center margin">
+      <b-button v-b-modal.modal-1 variant="danger" class="float">Delete Lecturer</b-button>
+      <b-modal header-bg-variant="danger" id="modal-1" title="Delete Lecturer?" @ok="deleteLecturer()" ok-title="Delete" ok-variant="danger" cancel-variant="warning" centered>
+        <h5>Are you sure you wish to delete?</h5>
+      </b-modal>
+    </div>
 
   </div>
 </template>
