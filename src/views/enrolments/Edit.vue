@@ -52,7 +52,7 @@ export default {
       let token = localStorage.getItem('token');
       let id = this.$route.params.id;
 
-      axios.get('http://college.api:8000/api/enrolments/' + id, {
+      axios.get('https://college-vue-conor.herokuapp.com/api/enrolments/' + id, {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -71,7 +71,7 @@ export default {
       let id = this.$route.params.id;
       let token = localStorage.getItem('token');
       event.preventDefault()
-      axios.put('http://college.api:8000/api/enrolments/' + id, {
+      axios.put('https://college-vue-conor.herokuapp.com/api/enrolments/' + id, {
           date: this.enrolment.date,
           time: this.enrolment.time,
           status: this.enrolment.status,

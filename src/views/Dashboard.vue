@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     showCourses() {
-      axios.post('http://college.api:8000/api/courses')
+      axios.post('https://college-vue-conor.herokuapp.com/api/courses')
       .then(response => {
         console.log(response.data);
         localStorage.setItem('token', response.data.token);

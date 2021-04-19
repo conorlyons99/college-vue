@@ -39,7 +39,7 @@ export default {
 
     let token = localStorage.getItem('token');
 
-    axios.get(`http://college.api:8000/api/enrolments/${this.$route.params.id}`, {
+    axios.get(`https://college-vue-conor.herokuapp.com/api/enrolments/${this.$route.params.id}`, {
       headers: { Authorization: "Bearer " + token}
     })
     .then(response => {
@@ -58,7 +58,7 @@ export default {
       let id = this.$route.params.id;
 
       axios
-      .delete(`http://college.api:8000/api/enrolments/${id}`, {
+      .delete(`https://college-vue-conor.herokuapp.com/api/enrolments/${id}`, {
           headers: { Authorization: "Bearer " + token },
         })
         .then(() => {

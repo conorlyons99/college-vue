@@ -6,8 +6,9 @@
     Status: <input type="text" v-model="form.status" class="form-input" /> <br>
     <!-- Course ID: <input type="text" v-model="form.course_id" class="form-input" /> <span v-if="errors.course_id"> {{ errors.course_id }} </span><br>
     Lecturer ID: <input type="text" v-model="form.lecturer_id" class="form-input" /> <span v-if="errors.lecturer_id"> {{ errors.lecturer_id }} </span><br> -->
-
+    Course ID:
     <b-form-select class="form-input" v-model="form.course_id" :options="courses" required></b-form-select>
+    Lecture ID:
     <b-form-select class="form-input" v-model="form.lecturer_id" :options="lecturers"></b-form-select>
     <b-button variant="primary" class="margin" @click="createEnrolment()">Submit</b-button>
 
@@ -45,13 +46,12 @@ export default {
     getLecturers() {
       let token = localStorage.getItem('token');
 
-      axios.get('http://college.api:8000/api/lecturers', {
+      axios.get('https://college-vue-conor.herokuapp.com/api/lecturers', {
         headers: { Authorization: "Bearer " + token}
       })
       .then(response => {
         console.log(response.data);
         this.lecturers = response.data.data;
-        this.filterLecturers = response.data.data;
       })
       .catch(error => {
         console.log(error)
@@ -62,7 +62,7 @@ export default {
     getCourses() {
       let token = localStorage.getItem('token');
 
-      axios.get('http://college.api:8000/api/courses', {
+      axios.get('https://college-vue-conor.herokuapp.com/api/courses', {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -70,7 +70,6 @@ export default {
         .then(response => {
           console.log(response.data);
           this.courses = response.data.data;
-          this.filterCourses = response.data.data;
         })
         .catch(error => {
           console.log(error)
@@ -82,7 +81,7 @@ export default {
       let token = localStorage.getItem('token');
 
 
-      axios.post('http://college.api:8000/api/enrolments', {
+      axios.post('https://college-vue-conor.herokuapp.com/api/enrolments', {
         date: this.form.date,
         time: this.form.time,
         status: this.form.status,

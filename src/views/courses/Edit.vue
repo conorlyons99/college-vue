@@ -14,6 +14,10 @@
       <b-form-input id="input-1" v-model="course.points" type="text" placeholder="Enter Points" required></b-form-input>
     </b-form-group>
 
+    <b-form-group id="input-group-1" label="Course Description:" label-for="input-1">
+      <b-form-textarea rows="3" max-rows="6" id="input-1" v-model="course.description" type="text" placeholder="Enter Description" required></b-form-textarea>
+    </b-form-group>
+
     <b-form-group id="input-group-1" label="Course Level:" label-for="input-1">
       <b-form-input id="input-1" v-model="course.level" type="text" placeholder="Enter Level" required></b-form-input>
     </b-form-group>
@@ -51,7 +55,7 @@ export default {
       let token = localStorage.getItem('token');
       let id = this.$route.params.id;
 
-      axios.get('http://college.api:8000/api/courses/' + id, {
+      axios.get('https://college-vue-conor.herokuapp.com/api/courses/' + id, {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -70,7 +74,7 @@ export default {
       let id = this.$route.params.id;
       let token = localStorage.getItem('token');
       event.preventDefault()
-      axios.put('http://college.api:8000/api/courses/' + id, {
+      axios.put('https://college-vue-conor.herokuapp.com/api/courses/' + id, {
           title: this.course.title,
           code: this.course.code,
           description: this.course.description,

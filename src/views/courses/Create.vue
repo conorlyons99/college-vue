@@ -39,7 +39,7 @@ export default {
       let token = localStorage.getItem('token');
 
 
-      axios.post('http://college.api:8000/api/courses', {
+      axios.post('https://college-vue-conor.herokuapp.com/api/courses', {
         title: this.form.title,
         code: this.form.code,
         description: this.form.description,

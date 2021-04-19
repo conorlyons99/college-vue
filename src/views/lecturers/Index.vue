@@ -76,7 +76,7 @@ export default {
     getLecturers() {
       let token = localStorage.getItem('token');
 
-      axios.get('http://college.api:8000/api/lecturers', {
+      axios.get('https://college-vue-conor.herokuapp.com/api/lecturers', {
         headers: { Authorization: "Bearer " + token}
       })
       .then(response => {
@@ -93,7 +93,7 @@ export default {
     logout() {
       let token = localStorage.getItem('token');
 
-      axios.get('http://college.api:8000/api/logout', {
+      axios.get('https://college-vue-conor.herokuapp.com/api/logout', {
         headers: { Authorization: "Bearer " + token}
       })
       .then(response => {
