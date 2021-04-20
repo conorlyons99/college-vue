@@ -10,6 +10,7 @@
       <b-nav-item :to="{name: 'homeLogin'}">Login</b-nav-item>
     </b-navbar-nav>
   </b-navbar>
+  <!-- The Applications navbar that displays the links to the various tables on the website -->
 </div>
 </template>
 <style>

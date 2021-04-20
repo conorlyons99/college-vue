@@ -4,11 +4,11 @@
   <br>
   <h6><router-link :to="{ name: 'courses_create'}">Create a Course</router-link></h6>
   <br>
-
+<!-- Router link that sends the user to the courses_create page -->
   <div class="search">
     <input class="searchTerm" type="text" placeholder="Search.." v-model="term" />
   </div>
-
+<!-- Search bar to filter out courses and display a course matching the users keylogs -->
   <b-button variant="danger" class="float-right" @click="logout()">Logout</b-button>
 
   <br><br>
@@ -29,7 +29,7 @@
       <router-link :to="{ name: 'courses_edit', params: { id: data.item.id }}">Edit</router-link>
     </template>
   </b-table>
-
+<!-- Bootstrap table that displays all of the courses within the DB, Includes an Actions tab which links the user to the edit page for that respective course -->
 
 </div>
 </template>
@@ -48,7 +48,7 @@ export default {
           sortable: true,
         },
         'code',
-        'points',
+        'points',                                             //Table fields that show in the index bootstrap table, includes sortable buttons
         {
           key: 'level',
           sortable: true,
@@ -56,27 +56,27 @@ export default {
         "Actions"
       ],
       courses: [],
-      term: "",
+      term: "",                                                                 //courses and filterCourses arrays
       filterCourses: [],
     }
   },
   watch: {
     term: function(newTerm, oldTerm) {
       console.log('New: ', newTerm)
-      console.log('Old: ', oldTerm)
+      console.log('Old: ', oldTerm)                                             //the watch component listens to the keylogs the user makes and run the searchCourse function
       this.searchCourse();
     }
   },
 
   mounted() {
-    this.getCourses();
+    this.getCourses();                                                          //As its the index page we always want the full courses table showing
   },
   methods: {
 
     searchCourse() {
       this.filterCourses = this.courses.filter(course => {
         if (course.title.toLowerCase().includes(this.term.toLowerCase())) {
-          return true
+          return true                                                           //seatchCourse function uses ES6 filter to display the course that corresponds with the users keylogs
         }
 
         if (course.code.toLowerCase().includes(this.term.toLowerCase())) {
@@ -92,11 +92,11 @@ export default {
           headers: {
             Authorization: "Bearer " + token
           }
-        })
-        .then(response => {
+        })                                                                      //getCourses function that gets called in the mounted
+        .then(response => {                                                     //Uses HTTP GET request to return the entire courses array
           console.log(response.data);
           this.courses = response.data.data;
-          this.filterCourses = response.data.data;
+          this.filterCourses = response.data.data;                              //filterCourses array, displays courses that match user input
         })
         .catch(error => {
           console.log(error)
@@ -114,7 +114,7 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          console.log("LOGGED OUT");
+          console.log("LOGGED OUT");                                            //logout method, returns the user to the homepage
           this.$router.replace({
             name: 'home'
           });
@@ -123,7 +123,7 @@ export default {
           console.log(error)
           console.log(error.response.data)
         })
-      localStorage.removeItem('token');
+      localStorage.removeItem('token');                                         //removes login token so user can not view tables of courses,lecturers,enrolments
     }
   },
 }
@@ -137,7 +137,7 @@ export default {
   position: relative;
   display: flex;
 }
-
+                                                                                /* styling */
 .searchTerm {
   width: 50%;
   border: 1px solid #00B4CC;

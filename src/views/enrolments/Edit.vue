@@ -25,7 +25,7 @@
     <b-button type="submit" variant="primary">Update Enrolment</b-button>
     <b-button variant="warning" class="float-left" @click="cancel()">Cancel</b-button>
   </b-form>
-
+<!-- Edit form within a bootstrap card, v-model contains information already known and fills the inputs with that information -->
 </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
   },
 
   created() {
-    this.getEnrolment();
+    this.getEnrolment();   //Created function which will always pull the enrolment that has the attached ID
 
   },
   methods: {
@@ -56,8 +56,8 @@ export default {
       let token = localStorage.getItem('token');
       let id = this.$route.params.id;
 
-      axios.get('https://college-vue-conor.herokuapp.com/api/enrolments/' + id, {
-          headers: {
+      axios.get('https://college-vue-conor.herokuapp.com/api/enrolments/' + id, { //Method to pull the enrolment with the respective ID
+          headers: {                                                              //Uses HTTP GET request to pull the data from the DB
             Authorization: "Bearer " + token
           }
         })
@@ -74,9 +74,9 @@ export default {
     onSubmit(event) {
       let id = this.$route.params.id;
       let token = localStorage.getItem('token');
-      event.preventDefault()
-      axios.put('https://college-vue-conor.herokuapp.com/api/enrolments/' + id, {
-          date: this.enrolment.date,
+      event.preventDefault()                                                    //preventDefault stops a new course being created on top of the course being edited
+      axios.put('https://college-vue-conor.herokuapp.com/api/enrolments/' + id, {//On submit function that will send a HTTP Put
+          date: this.enrolment.date,                                              //request to overwrite the enrolment with the new info submitted
           time: this.enrolment.time,
           status: this.enrolment.status,
           course_id: this.enrolment.course_id,
@@ -102,11 +102,6 @@ export default {
     },
     onReset(event) {
       event.preventDefault()
-      // Reset our form values
-      this.form.email = ''
-      this.form.name = ''
-      this.form.food = null
-      this.form.checked = []
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {

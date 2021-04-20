@@ -10,7 +10,7 @@
           <h5>Level:</h5> {{ course.level }} <br>
           </b-card-text>
         </b-card>
-
+<!-- Bootstrap card that displays information about the course, pulled from DB -->
         <b-card style="max-width: 80rem;" class="mb-2 home">
           <b-card-text>
             <h5>Description:</h5> {{ course.description }} <br>
@@ -24,14 +24,14 @@
             <b class="my-4">Note: Action may be required twice for course to be deleted</b>
           </b-modal>
         </div>
-
+<!-- Delete modal that pops up when delete button is pressed, Ok button renamed to delete then runs deleteCourse method when pressed -->
 
   <b-table striped hover :items="course.enrolments">
     <!-- <template #cell(title)="data">
       <router-link :to="{ name: 'courses_show', params: { id: data.item.id }}">{{ data.item.title }}</router-link>
     </template> -->
   </b-table>
-
+<!-- Boostrap table that shows all enrolments associated with that particular course -->
   </div>
 </template>
 
@@ -53,8 +53,8 @@ export default {
 
     axios.get(`https://college-vue-conor.herokuapp.com/api/courses/${this.$route.params.id}`, {
       headers: { Authorization: "Bearer " + token}
-    })
-    .then(response => {
+    })                                                                          //Inside mounted, we always want the app to display
+    .then(response => {                                                         //the course with the corresponding ID so we see the correct information
       console.log(response.data);
       this.course = response.data.data;
 
@@ -72,8 +72,8 @@ export default {
       this.course.enrolments.forEach((enrolment) => {
         console.log(enrolment.id);
         axios
-        .delete("https://college-vue-conor.herokuapp.com/api/enrolments/" + enrolment.id, {
-            headers: { Authorization: "Bearer " + token },
+        .delete("https://college-vue-conor.herokuapp.com/api/enrolments/" + enrolment.id, {   //Delete course method runs a for loop that deletes each enrolment
+            headers: { Authorization: "Bearer " + token },                                    //attached to the course before then running the DELETE HTTP request and removes the course from the DB
           })
           .catch(function (error) {
             console.log(error);

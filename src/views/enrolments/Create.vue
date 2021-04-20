@@ -15,8 +15,8 @@
       <b-form-select-option v-for="lecturer in lecturers" :key="lecturer.id" :value="lecturer.id">{{ lecturer.name }}</b-form-select-option>
     </b-form-select>
     <b-button variant="primary" class="margin" @click="createEnrolment()">Submit</b-button>
-
-
+    <!-- b-form-selects that display dropdown lists of courses and lecturers meaning users dont need to input an ID -->
+    <!-- Works by running the getCourses and getLecturers methods that pull all of that information into that page to be used when called -->
   </div>
 </template>
 
@@ -33,17 +33,17 @@ export default {
         date: "",
         time: "",
         status: "",
-        course_id: null,
+        course_id: null,                                              //Form data that is expected by the form
         lecturer_id: null,
       },
       courses: [],
-      lecturers: [],
+      lecturers: [],                                                //courses and lecturers arrays that are required to display their data in the select forms
       errors: {}
     }
   },
   mounted(){
     this.getCourses();
-    this.getLecturers();
+    this.getLecturers();                                        //These methods are mounted as we want that information constantly available
   },
   methods: {
 
@@ -93,8 +93,8 @@ export default {
         lecturer_id: this.form.lecturer_id,
       },
       {
-        headers: { Authorization: "Bearer " + token}
-      })
+        headers: { Authorization: "Bearer " + token}                            //Like courses, runs the POST HTTP request that pushes the inputted information
+      })                                                                        //to the DB and redirects the user back to the index page
       .then(response => {
         console.log(response.data);
         this.$router.push({ name: 'enrolments_index' });
@@ -121,14 +121,11 @@ export default {
 }
 .form-input{
   color:black;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight:500;
   font-size: 18px;
   border-radius: 5px;
   line-height: 22px;
   background-color: transparent;
   border:1px solid #CC6666;
-  transition: all 0.3s;
   padding: 13px;
   margin-bottom: 15px;
   width:100%;
@@ -136,5 +133,4 @@ export default {
   outline:0;
 }
 
-.form-input:focus { border:2px solid #CC4945 }
 </style>

@@ -6,13 +6,13 @@
     Points: <input type="text" v-model="form.points" class="form-input" /> <span v-if="errors.points"> {{ errors.points }} </span><br>
     Level: <input type="text" v-model="form.level" class="form-input" /> <span v-if="errors.level"> {{ errors.level }} </span><br>
     <b-button variant="primary" class="margin" @click="createCourse()">Submit</b-button>
-
+    <!-- Create course form, like login, expects form data which is found in the data() of this page -->
 
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios';    //Import axios for HTTP requests
 
 export default {
   name: 'CourseCreate',
@@ -23,7 +23,7 @@ export default {
       form: {
         title: "",
         code: "",
-        description: "",
+        description: "",      //Form labels that will take the new Course information
         points: "",
         level: "",
       },
@@ -42,8 +42,8 @@ export default {
       axios.post('https://college-vue-conor.herokuapp.com/api/courses', {
         title: this.form.title,
         code: this.form.code,
-        description: this.form.description,
-        points: this.form.points,
+        description: this.form.description,                                     //POST HTTP Request that posts the newly
+        points: this.form.points,                                               //inputted info to the DB
         level: this.form.level,
       },
       {
@@ -51,12 +51,12 @@ export default {
       })
       .then(response => {
         console.log(response.data);
-        this.$router.push({ name: 'courses_index' });
+        this.$router.push({ name: 'courses_index' });                           //Redirect after submit button is pressed
       })
       .catch(error => {
         console.log(error)
         console.log(error.response.data)
-        if (error.response.data.errors) {
+        if (error.response.data.errors) {                                       //log errors to console
           this.errors = error.response.data.errors
         }
       })
@@ -88,6 +88,6 @@ export default {
   box-sizing: border-box;
   outline:0;
 }
-
+                                                                                
 .form-input:focus { border:2px solid #CC4945 }
 </style>

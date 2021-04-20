@@ -5,6 +5,7 @@
     <h4>Password:</h4><input type="password" v-model="form.password" class="form-input" />
     <b-button class="float" variant="outline-primary" @click="login()">Login</b-button>
   </b-card>
+  <!-- Inputs for user login, v-model indicates that the inputs are looking for the form data email and password -->
   <h4 class="home margin">Hello! Welcome to my College-Vue Application. </h4>
     <h5 class="home">Use the following information to access the various pages</h5>
     <h6 class="home">Username: sam@bloggs.com</h6>
@@ -15,13 +16,13 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'HomeLogin',
+  name: 'HomeLogin',          //Router page name
   components: {
   },
   data(){
     return{
       form: {
-        email: "",
+        email: "",            //Form data for the input tags
         password: ""
       }
     }
@@ -29,16 +30,16 @@ export default {
   methods: {
     login() {
       axios.post('https://college-vue-conor.herokuapp.com/api/login', {
-        email: this.form.email,
-        password: this.form.password
+        email: this.form.email,                                                 //Using Axios, posts the inputted data to the
+        password: this.form.password                                            //API and generates a login token
       })
       .then(response => {
         console.log(response.data);
         localStorage.setItem('token', response.data.token);
-        this.$router.replace({ name: '/courses' });
-      })
+        this.$router.replace({ name: '/courses' });                             //$router.replace tells the app to redirect to
+      })                                                                        //courses index page once login finishes
       .catch(error => {
-        console.log(error)
+        console.log(error)                                                      //logs errors if there are problems with login
         console.log(error.response.data)
       })
     }

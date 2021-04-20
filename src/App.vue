@@ -22,3 +22,5 @@ export default {
 
 <style>
 </style>
+                  <!-- App template which includes the sites navbar
+                  and router to navigate around the website -->

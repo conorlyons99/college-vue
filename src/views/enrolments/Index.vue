@@ -37,7 +37,7 @@ export default {
         },
         'time',
         'status',
-        'course_id',
+        'course_id',                      //Table fields that show in the index bootstrap table, includes sortable buttons
         'lecturer_id',
         'Actions',
         ],
@@ -45,7 +45,7 @@ export default {
     }
   },
   mounted(){
-    this.getEnrolments();
+    this.getEnrolments();  //As its the index page we always want the full enrolments table showing
   },
   methods: {
     getEnrolments() {
@@ -58,8 +58,8 @@ export default {
         console.log(response.data);
         this.enrolments = response.data.data;
 
-      })
-      .catch(error => {
+      })                                                                    //getCourses function that gets called in the mounted
+      .catch(error => {                                                     //Uses HTTP GET request to return the entire courses array
         console.log(error)
         console.log(error.response.data)
       })
@@ -80,7 +80,7 @@ export default {
         console.log(error)
         console.log(error.response.data)
       })
-      localStorage.removeItem('token');
+      localStorage.removeItem('token');     //removes login token so user can not view tables of courses,lecturers,enrolments
     }
   },
 }

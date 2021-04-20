@@ -18,7 +18,7 @@
             <h5>Are you sure you wish to delete?</h5>
           </b-modal>
         </div>
-
+<!-- Delete modal that pops up when delete button is pressed, Ok button renamed to delete then runs deleteEnrolment method when pressed -->
 
   </div>
 </template>

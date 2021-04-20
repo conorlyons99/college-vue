@@ -1,14 +1,13 @@
-import Vue from 'vue'
+import Vue from 'vue'                                                           //Importing Vue and VueRouter into the App
 import Router from 'vue-router'
 
 import Home from './views/Home'
 import HomeLogin from './views/HomeLogin'
-import Dashboard from './views/Dashboard'
 import CoursesIndex from './views/courses/Index'
 import CoursesShow from './views/courses/Show'
 import CoursesEdit from './views/courses/Edit'
-import CoursesCreate from './views/courses/Create'
-import LecturersIndex from './views/lecturers/Index'
+import CoursesCreate from './views/courses/Create'                              //Importing the various App pages
+import LecturersIndex from './views/lecturers/Index'                            //from their respective folders
 import LecturersShow from './views/lecturers/Show'
 import LecturersEdit from './views/lecturers/Edit'
 import LecturersCreate from './views/lecturers/Create'
@@ -17,8 +16,8 @@ import EnrolmentsShow from './views/enrolments/Show'
 import EnrolmentsEdit from './views/enrolments/Edit'
 import EnrolmentsCreate from './views/enrolments/Create'
 
-Vue.use(Router)
-
+Vue.use(Router)                                                                 //Telling the App to use Router and
+                                                                                //Initialising a new Router
 export default new Router ({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -34,18 +33,13 @@ export default new Router ({
       component: HomeLogin
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard
-    },
-    {
       path: '/courses',
       name: 'courses_index',
       component: CoursesIndex
     },
     {
-      path: '/courses/show',
-      name: 'courses_show',
+      path: '/courses/show',                                                    //The app routes that will be used to navigate
+      name: 'courses_show',                                                     //Around the application
       component: CoursesShow
     },
     {

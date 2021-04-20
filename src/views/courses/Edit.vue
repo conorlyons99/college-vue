@@ -27,7 +27,7 @@
     <b-button variant="warning" class="float-left" @click="cancel()">Cancel</b-button>
   </b-form>
 </b-card>
-
+<!-- Edit form within a bootstrap card, v-model contains information already known and fills the inputs with that information -->
 </div>
 </template>
 
@@ -45,18 +45,18 @@ export default {
     }
   },
   created() {
-    this.getCourse();
+    this.getCourse();           //Created function which will always pull the course that has the attached ID
   },
   methods: {
     cancel(){
-      this.$router.replace({ name: 'courses_index' });
+      this.$router.replace({ name: 'courses_index' });      //Cancel button route
     },
     getCourse() {
       let token = localStorage.getItem('token');
       let id = this.$route.params.id;
 
-      axios.get('https://college-vue-conor.herokuapp.com/api/courses/' + id, {
-          headers: {
+      axios.get('https://college-vue-conor.herokuapp.com/api/courses/' + id, {  //Method to pull the course with the respective ID
+          headers: {                                                            //Uses HTTP GET request to pull the data from the DB
             Authorization: "Bearer " + token
           }
         })
@@ -73,10 +73,10 @@ export default {
     onSubmit(event) {
       let id = this.$route.params.id;
       let token = localStorage.getItem('token');
-      event.preventDefault()
+      event.preventDefault()                                                    //preventDefault stops a new course being created on top of the course being edited
       axios.put('https://college-vue-conor.herokuapp.com/api/courses/' + id, {
-          title: this.course.title,
-          code: this.course.code,
+          title: this.course.title,                                              //On submit function that will send a HTTP Put
+          code: this.course.code,                                                //request to overwrite the course with the new info submitted
           description: this.course.description,
           points: this.course.points,
           level: this.course.level,
