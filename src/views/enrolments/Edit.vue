@@ -5,21 +5,22 @@
       <b-form-input id="input-1" v-model="enrolment.date" type="text" placeholder="Enter Date" required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Time:" label-for="input-1">
-      <b-form-input id="input-1" v-model="enrolment.time" type="text" placeholder="Enter Time" required></b-form-input>
+    <b-form-group id="input-group-2" label="Time:" label-for="input-2">
+      <b-form-input id="input-2" v-model="enrolment.time" type="text" placeholder="Enter Time" required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Status:" label-for="input-1">
-      <b-form-input id="input-1" v-model="enrolment.status" type="text" placeholder="Enter Status" required></b-form-input>
+    <b-form-group id="input-group-3" label="Status:" label-for="input-3">
+      <b-form-input id="input-3" v-model="enrolment.status" type="text" placeholder="Enter Status" required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Course ID:" label-for="input-1">
-      <b-form-input id="input-1" v-model="enrolment.course_id" type="text" placeholder="Enter Course ID" required></b-form-input>
+    <b-form-group id="input-group-4" label="Course ID:" label-for="input-4">
+      <b-form-input id="input-4" v-model="enrolment.course_id" type="text" placeholder="Enter Course ID" required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Lecturer ID:" label-for="input-1">
-      <b-form-input id="input-1" v-model="enrolment.lecturer_id" type="text" placeholder="Enter Lecturer ID" required></b-form-input>
+    <b-form-group id="input-group-5" label="Lecturer ID:" label-for="input-5">
+      <b-form-input id="input-5" v-model="enrolment.lecturer_id" type="text" placeholder="Enter Lecturer ID" required></b-form-input>
     </b-form-group>
+
 
     <b-button type="submit" variant="primary">Update Enrolment</b-button>
     <b-button variant="warning" class="float-left" @click="cancel()">Cancel</b-button>
@@ -41,10 +42,13 @@ export default {
       show: true
     }
   },
+
   created() {
     this.getEnrolment();
+
   },
   methods: {
+
     cancel(){
       this.$router.replace({ name: 'enrolments_index' });
     },

@@ -7,9 +7,13 @@
     <!-- Course ID: <input type="text" v-model="form.course_id" class="form-input" /> <span v-if="errors.course_id"> {{ errors.course_id }} </span><br>
     Lecturer ID: <input type="text" v-model="form.lecturer_id" class="form-input" /> <span v-if="errors.lecturer_id"> {{ errors.lecturer_id }} </span><br> -->
     Course ID:
-    <b-form-select class="form-input" v-model="form.course_id" :options="courses" required></b-form-select>
-    Lecture ID:
-    <b-form-select class="form-input" v-model="form.lecturer_id" :options="lecturers"></b-form-select>
+    <b-form-select class="form-input" v-model="form.course_id" required>
+      <b-form-select-option v-for="course in courses" :key="course.id" :value="course.id">{{ course.title }}</b-form-select-option>
+    </b-form-select>
+    Lecturer ID:
+    <b-form-select class="form-input" v-model="form.lecturer_id" required>
+      <b-form-select-option v-for="lecturer in lecturers" :key="lecturer.id" :value="lecturer.id">{{ lecturer.name }}</b-form-select-option>
+    </b-form-select>
     <b-button variant="primary" class="margin" @click="createEnrolment()">Submit</b-button>
 
 
