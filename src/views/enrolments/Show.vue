@@ -7,8 +7,8 @@
           <h5>Date:</h5> {{ enrolment.date }}  <br>
             <h5>Time:</h5> {{ enrolment.time }} <br>
             <h5>Status:</h5> {{ enrolment.status }} <br>
-          <h5>Course ID:</h5> {{ enrolment.course_id }} <br>
-          <h5>Lecturer ID:</h5> {{ enrolment.lecturer_id }} <br>
+          <h5>Course:</h5> {{ enrolment.course.title }} <br>
+          <h5>Lecturer:</h5> {{ enrolment.lecturer.name }} <br>
           </b-card-text>
         </b-card>
 

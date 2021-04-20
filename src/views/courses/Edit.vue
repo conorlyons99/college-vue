@@ -6,19 +6,19 @@
       <b-form-input id="input-1" v-model="course.title" type="text" placeholder="Enter title" required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Course code:" label-for="input-1">
-      <b-form-input id="input-1" v-model="course.code" type="text" placeholder="Enter code" required></b-form-input>
+    <b-form-group id="input-group-2" label="Course code:" label-for="input-2">
+      <b-form-input id="input-2" v-model="course.code" type="text" placeholder="Enter code" required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Course Points:" label-for="input-1">
-      <b-form-input id="input-1" v-model="course.points" type="text" placeholder="Enter Points" required></b-form-input>
+    <b-form-group id="input-group-3" label="Course Points:" label-for="input-3">
+      <b-form-input id="input-3" v-model="course.points" type="text" placeholder="Enter Points" required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Course Description:" label-for="input-1">
+    <b-form-group id="input-group-4" label="Course Description:" label-for="input-4">
       <b-form-textarea rows="3" max-rows="6" id="input-1" v-model="course.description" type="text" placeholder="Enter Description" required></b-form-textarea>
     </b-form-group>
 
-    <b-form-group id="input-group-1" label="Course Level:" label-for="input-1">
+    <b-form-group id="input-group-5" label="Course Level:" label-for="input-5">
       <b-form-input id="input-1" v-model="course.level" type="text" placeholder="Enter Level" required></b-form-input>
     </b-form-group>
 
@@ -101,11 +101,6 @@ export default {
     },
     onReset(event) {
       event.preventDefault()
-      // Reset our form values
-      this.form.email = ''
-      this.form.name = ''
-      this.form.food = null
-      this.form.checked = []
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {

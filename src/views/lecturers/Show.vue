@@ -3,10 +3,10 @@
 
     <b-card style="max-width: 80rem;" class="mb-2 home">
       <b-card-text>
-      <h5>Title:</h5> {{ lecturer.name }}  <br>
-        <h5>Code:</h5> {{ lecturer.address }} <br>
-        <h5>Description:</h5> {{ lecturer.email }} <br>
-        <h5>Points:</h5> {{ lecturer.phone }} <br>
+      <h5>Name:</h5> {{ lecturer.name }}  <br>
+        <h5>Address:</h5> {{ lecturer.address }} <br>
+        <h5>Email:</h5> {{ lecturer.email }} <br>
+        <h5>Phone:</h5> {{ lecturer.phone }} <br>
       </b-card-text>
     </b-card>
 
